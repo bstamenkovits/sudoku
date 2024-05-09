@@ -26,18 +26,18 @@ def get_game(game_idx: int = None) -> dict:
         return game
     
 
-if __name__ == "__main__":
-    game = get_game(0)
+if __name__ == "__main__":    
     # puzzle_str = '004371259325849761971260843436192587198657432257483916689734125713528694542916378'
-    
     # puzzle = Board(input=puzzle_str)
+    
+    # load data
+    game = get_game(0)
     puzzle = Board(input=game['puzzle'])
     solution = Board(input=game['solution'])
-    # print(game['solution'])
-    # solution.check_board()
     
+    # solve puzzle
     solver = BruteForceSolver(board=puzzle)
-    solved_board = solver.solve()
+    solver.solve()
     
-    solved_board = solver.board.matrix
-    print(solved_board)
+    solved_board = solver.board
+    print(f"Correct Solution: {solved_board == solution}")

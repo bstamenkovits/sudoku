@@ -10,6 +10,9 @@ class Board:
 
     def __getitem__(self, index):
         return self.matrix[index]
+    
+    def __eq__(self, other):
+        return self.matrix == other.matrix
 
     def load_matrix(self, input: str) -> list:
         """
