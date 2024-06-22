@@ -1,0 +1,94 @@
+:root {
+    --cell-margin: 1.5px;
+    --cell-size: 50px;
+
+    --box-margin: 1.5px;
+    --box-size: calc(var(--cell-size) * 3 + var(--box-margin)*2);
+    
+    --cell-input-size: 50px;
+    --cell-input-active-color: #808080;
+    
+    --font-size: 1.2em;
+    --main-color: rgb(232, 232, 232);
+    
+    color: #545454;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 550;
+}
+
+#sudoku-container {
+    margin:0px;
+    padding:0px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    height: 100vh;
+
+}
+
+#board {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    /* background-color: blueviolet; */
+    width: calc(var(--box-size) * 3); 
+    height: calc(var(--box-size) * 3);
+    margin: 50px 0px;
+}
+
+.box {
+    display: grid;
+    grid-template-columns: repeat(3, var(--cell-size));
+    grid-template-rows: repeat(3, var(--cell-size));
+    margin: var(--box-margin);
+    /* background-color: white; */
+}
+
+.cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--font-size);
+    padding: 20px;
+    margin: var(--cell-margin);
+    background-color: var(--main-color);
+    border-radius: 4px;
+}
+
+.cell.active {
+    background-color: #688ebd;
+    color: white;
+    font-weight: bolder;
+}
+
+.cell-input-row {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 10px;
+
+}
+
+.cell-input {
+    width: var(--cell-input-size);
+    height: var(--cell-input-size);
+    font-size: var(--font-size);
+    background-color: #f2f2f2; /* Background color for visibility */
+    border: 2px solid #ccc; /* Add a border to the cells */
+    border-radius: 50%; /* Make the cells circular */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    margin: 0px 10px;
+}
+
+.cell-input.active {
+    background-color: var(--cell-input-active-color);
+    border: 0px;
+    color:white;
+    font-weight: bolder;
+}
