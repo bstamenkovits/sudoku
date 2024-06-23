@@ -1,3 +1,25 @@
+function createEditGrid() {
+    let editGrid = document.createElement("div");
+    editGrid.classList.add("edit-grid");
+    editGrid.classList.add("hidden");
+
+    for (let rowIdx = 0; rowIdx < 3; rowIdx++) {
+        let editRowDiv = document.createElement("div");
+        editRowDiv.classList.add("edit-grid-row");
+        for (let colIdx = 0; colIdx < 3; colIdx++) {
+            let editCellDiv = document.createElement("div");
+            editCellDiv.classList.add("edit-grid-cell");
+            // editCellDiv.classList.add("active");
+
+            editCellDiv.textContent = 3*rowIdx + colIdx + 1;
+            editRowDiv.appendChild(editCellDiv);
+        }
+        editGrid.appendChild(editRowDiv);
+    }
+    return editGrid;
+}
+
+
 class Cell {
     constructor(value, rowIdx, colIdx, boxIdx, boxPos, div, active=false) {
         this.value = value
@@ -7,6 +29,47 @@ class Cell {
         this.boxPos = boxPos
         this.div = div
         this.active = active
+        this.validValues = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+    }
+
+    hideEditGrid() {
+        this.div.querySelector(".edit-grid").classList.add("hidden");
+    }
+
+    showEditGrid() {
+        this.div.querySelector(".edit-grid").classList.remove("hidden");
+    }
+
+    updateValue(value) {
+        value = (this.validValues.includes(value)) ? value : ""
+        
+        // update internal value
+        this.value = value
+        
+        // update shown value
+        this.div.querySelector(".cell-value").textContent = value
+    }
+
+    updateEditGrid(value) {
+        let editGrid = this.div.querySelector(".edit-grid")
+        let editCells = editGrid.querySelectorAll(".edit-grid-cell")
+        editCells.forEach(editCell => {
+            if (editCell.textContent == value) {
+                editCell.classList.add("active");
+            }
+        })
+    }
+
+    getEditGridActiveValues() {
+        let editGrid = this.div.querySelector(".edit-grid")
+        let editCells = editGrid.querySelectorAll(".edit-grid-cell")
+        let values = []
+        editCells.forEach(editCell => {
+            if (editCell.classList.contains("active")) {
+                values.push(editCell.textContent)
+            }
+        })
+        return values
     }
 }
 
@@ -42,11 +105,17 @@ class Board {
                 
                 // get value from this.puzzle
                 let value = this.puzzle[puzzleIdx]
+                let valueDiv = document.createElement("div");
+                valueDiv.classList.add("cell-value");
+                valueDiv.textContent = (value != "0") ? value : "";
+                cellDiv.appendChild(valueDiv);
                 
                 // set cellDiv text content and create Cell object
-                cellDiv.textContent = (value != "0") ? value : "";
-                cellDiv.setAttribute('id', `(${rowIdx},${colIdx})`);
+                let editGrid = createEditGrid();
+                cellDiv.appendChild(editGrid);
+
                 let cell = new Cell(value, rowIdx, colIdx, boxIdx, boxPos, cellDiv)
+                cell.updateValue(value)
                 
                 // track cell in sudoku board
                 this.boxes[boxIdx][boxPos] = cell
@@ -64,13 +133,10 @@ class Board {
     }
 
     checkInput(cell, value) {
-        console.log(this.rows)
-        console.log(this.columns)
-        console.log(cell)
+        
         // check row
         for (let colIdx = 0; colIdx < 9; colIdx++) {
             let otherCell = this.rows[cell.rowIdx][colIdx]
-            console.log(otherCell.div)
             if (otherCell.value == value && cell.colIdx != colIdx) {
                 return otherCell
             }
@@ -91,7 +157,6 @@ class Board {
                 return otherCell
             }
         }
-
         return null
     
     }

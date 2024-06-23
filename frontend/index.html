@@ -4,13 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="slider.css">
+    <link rel="stylesheet" href="edit-grid.css">
     <script src="board.js" defer></script>
     <script src="app.js" defer></script>
-    <link rel="stylesheet" href="style.css">
+    
 </head>
 <body>
     <div id="sudoku-container">
         <div id="board"></div>
+
+        <div id="edit-mode-container">
+            <span>Edit Mode</span>
+            <label class="switch">
+                <input id='edit-mode-input' type="checkbox">
+                <span class="slider round"></span>
+            </label>
+        </div>
+        
 
         <div id="controls">
             <div class="cell-input-row">

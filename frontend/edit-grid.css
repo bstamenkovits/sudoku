@@ -1,0 +1,26 @@
+.edit-grid {
+    /* display:flex; */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: var(--cell-size);
+}
+
+.edit-grid-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 6px;
+    /* align-items: center; */
+    /* margin: 10px; */
+}
+
+.edit-grid-cell {
+    color: rgba(169, 169, 169, 0);
+    font-size: 0.7rem;
+}
+
+.edit-grid-cell.active {
+    color:  rgb(169, 169, 169);
+    font-weight: bolder;
+}
