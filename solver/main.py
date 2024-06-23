@@ -27,9 +27,6 @@ def get_game(game_idx: int = None) -> dict:
     
 
 if __name__ == "__main__":    
-    # puzzle_str = '004371259325849761971260843436192587198657432257483916689734125713528694542916378'
-    # puzzle = Board(input=puzzle_str)
-    
     # load data
     game = get_game(0)
     puzzle = Board(input=game['puzzle'])

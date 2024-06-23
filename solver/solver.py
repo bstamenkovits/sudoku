@@ -6,6 +6,12 @@ class BruteForceSolver:
         self.board = board
         
     def solve(self) -> Board:
+        """
+        A recursive function to solve the sudoku board using brute force.
+        
+        Returns:
+            (Board): The solved board.
+        """
         # initial values
         row_idx = -1
         col_idx = -1
