@@ -12,6 +12,7 @@
     --font-color: #545454;
 
     --main-color: rgb(232, 232, 232);
+    --highlight-color: #3f79f7;
     
     color: var(--font-color);
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -67,9 +68,9 @@
 
 .cell.active {
     /* background-color: #688ebd; */
-    color: #3f79f7;
+    color: var(--highlight-color);
     /* font-weight: bolder; */
-    border: 2px solid #3f79f7;
+    border: 2px solid var(--highlight-color);
 }
 
 .cell.conflict {
@@ -117,7 +118,7 @@
 }
 
 .cell-input.active {
-    background-color: var(--cell-input-active-color);
+    background-color: var(--highlight-color);
     border: 0px;
     color:white;
     font-weight: bolder;

@@ -1,7 +1,7 @@
 function createEditGrid() {
     let editGrid = document.createElement("div");
     editGrid.classList.add("edit-grid");
-    editGrid.classList.add("hidden");
+    // editGrid.classList.add("hidden");
 
     for (let rowIdx = 0; rowIdx < 3; rowIdx++) {
         let editRowDiv = document.createElement("div");
@@ -50,12 +50,15 @@ class Cell {
         this.div.querySelector(".cell-value").textContent = value
     }
 
-    updateEditGrid(value) {
+    updateEditGrid(values) {
         let editGrid = this.div.querySelector(".edit-grid")
         let editCells = editGrid.querySelectorAll(".edit-grid-cell")
         editCells.forEach(editCell => {
-            if (editCell.textContent == value) {
-                editCell.classList.add("active");
+            if (values.includes(editCell.textContent)) {
+                editCell.classList.add("active")
+            }
+            else {
+                editCell.classList.remove("active")
             }
         })
     }
@@ -113,6 +116,8 @@ class Board {
                 // set cellDiv text content and create Cell object
                 let editGrid = createEditGrid();
                 cellDiv.appendChild(editGrid);
+
+                if (valueDiv.textContent != "") {editGrid.classList.add("hidden")}
 
                 let cell = new Cell(value, rowIdx, colIdx, boxIdx, boxPos, cellDiv)
                 cell.updateValue(value)
