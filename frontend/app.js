@@ -16,7 +16,6 @@ function getActiveCell() {
     return board.cells.find(cell => cell.div == cellDiv)
 }
 
-
 async function validateCell(cell, value) {
     let conflictingCell = board.checkInput(cell, value)
     if (conflictingCell) {
@@ -28,19 +27,19 @@ async function validateCell(cell, value) {
     return true;
 }
 
-
-
 async function handleInputClick(inputDiv) {
     let editMode = document.getElementById("edit-mode-input").checked;
     if (editMode) {
-        // add active to selected input div
-        inputDiv.classList.toggle("active")
+        if (board.activeCell.value == "") {
+            // add active to selected input div
+            inputDiv.classList.toggle("active")
 
-        // activate edit grid value
-        let activeInputs = getActiveInputs().map(inputDiv => inputDiv.textContent);
-        console.log(activeInputs);
-        board.activeCell.updateEditGrid(activeInputs);
-        
+            // activate edit grid value
+            let activeInputs = getActiveInputs().map(inputDiv => inputDiv.textContent);
+            console.log(activeInputs);
+            board.activeCell.updateEditGrid(activeInputs);
+        }
+        return
     }
 
     else { 
@@ -75,25 +74,34 @@ function handleCellClick(cellDiv){
     cellDiv.classList.add("active");
     board.activeCell = getActiveCell();
 
+    // check if in edit mode
     let editMode = document.getElementById("edit-mode-input").checked;
-    if (editMode && board.activeCell.value == "") {
-        board.activeCell.showEditGrid();
-        
-        let activeValues = board.activeCell.getEditGridActiveValues();
-        inputDivs.forEach(inputDiv => {
-            if (activeValues.includes(inputDiv.textContent)) {
-                inputDiv.classList.add("active");
-            }
-            else {
-                inputDiv.classList.remove("active");
-            }
-        })
-        
-        
-    }
+    if (editMode) {
+        // check if in edit mode AND cell is empty
+        if (board.activeCell.value == "") {
+            board.activeCell.showEditGrid();
 
-    else {
-        // board.activeCell.hideEditGrid();
+            // active values in edit grid
+            let activeValues = board.activeCell.getEditGridActiveValues();
+
+            // show active selection based on active values in edit grid
+            inputDivs.forEach(inputDiv => {
+                if (activeValues.includes(inputDiv.textContent)) {
+                    inputDiv.classList.add("active");
+                }
+                else {
+                    inputDiv.classList.remove("active");
+                }
+            })
+        }
+
+        // check if in edit mode AND cell is filled
+        else {
+            // remove active from all input divs
+            inputDivs.forEach(inputDiv => {
+                inputDiv.classList.remove("active")
+            });
+        }
     }
 }
 
