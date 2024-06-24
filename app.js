@@ -1,6 +1,3 @@
-const puzzle = "004300209005009001070060043006002087190007400050083000600000105003508690042910300";
-const board = new Board(puzzle);
-
 const cellDivs = board.getCellDivs()
 const inputDivs = getInputs();
 const editModeToggle = document.getElementById("edit-mode-input");
