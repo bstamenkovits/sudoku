@@ -1,6 +1,7 @@
 :root {
     --cell-margin: 1.5px;
     --cell-size: 45px;
+    --cell-padding: 20px;
 
     --box-margin: 1.5px;
     --box-size: calc(var(--cell-size) * 3 + var(--box-margin)*2);
@@ -17,6 +18,30 @@
     color: var(--font-color);
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-weight: 550;
+}
+
+@media (max-width: 768px) {
+    :root {
+        --cell-margin: 1px;
+        --cell-size: 30px;
+        --cell-padding: 12px;
+
+        --box-margin: 1px;
+        --box-size: calc(var(--cell-size) * 3 + var(--box-margin)*2);
+        
+        --cell-input-size: 30px;
+        --cell-input-active-color: #808080;
+        
+        --font-size: 0.9em;
+        --font-color: #545454;
+
+        --main-color: rgb(232, 232, 232);
+        --highlight-color: #3f79f7;
+        
+        color: var(--font-color);
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-weight: 550;
+    }
 }
 
 .hidden {
@@ -59,7 +84,7 @@
     justify-content: center;
     align-items: center;
     font-size: var(--font-size);
-    padding: 20px;
+    padding: var(--cell-padding);
     margin: var(--cell-margin);
     background-color: var(--main-color);
     border-radius: 4px;
@@ -107,7 +132,7 @@
     height: var(--cell-input-size);
     font-size: var(--font-size);
     background-color: #f2f2f2; /* Background color for visibility */
-    border: 2px solid #ccc; /* Add a border to the cells */
+    border: 1px solid #ccc; /* Add a border to the cells */
     border-radius: 50%; /* Make the cells circular */
     display: flex;
     align-items: center;

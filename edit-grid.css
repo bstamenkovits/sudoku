@@ -1,3 +1,15 @@
+:root {
+    --edit-grid-gap: 6px;
+    --edit-grid-fontsize: 0.6rem;
+}
+
+@media (max-width: 768px) {
+    :root {
+        --edit-grid-gap: 3px;
+        --edit-grid-fontsize: 0.35rem;
+    }
+}
+
 .edit-grid {
     /* display:flex; */
     flex-direction: column;
@@ -10,14 +22,14 @@
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    gap: 6px;
+    gap: var(--edit-grid-gap);
     /* align-items: center; */
     /* margin: 10px; */
 }
 
 .edit-grid-cell {
     color: rgba(169, 169, 169, 0);
-    font-size: 0.7rem;
+    font-size: var(--edit-grid-fontsize);
 }
 
 .edit-grid-cell.active {
