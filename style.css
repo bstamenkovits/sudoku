@@ -1,6 +1,6 @@
 :root {
     --cell-margin: 1.5px;
-    --cell-size: 50px;
+    --cell-size: 45px;
 
     --box-margin: 1.5px;
     --box-size: calc(var(--cell-size) * 3 + var(--box-margin)*2);
